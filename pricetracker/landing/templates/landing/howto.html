@@ -1,0 +1,27 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10 col-sm-12 text-center">
+            <h2 class="display-2">How To Use</h2>
+            </div>
+        </div>
+        <div>
+            <div class="card mt-3"><h4>1) Access the page:<a class="nav-link" href="{% url 'item-list' %}">
+                <button class="btn btn-info">PriceTrack</button>
+            </a> </h4></div>
+            <div class="card mt-3"><h4>2) Enter a product URL from amazon with an existing price 
+                (note: some pages do not work correctly such as missing image, or invalid track) </h4> </h4>
+            </div>
+            <div><h4>
+                3) Item will be tracked into the database where you can now also access detailed price information which displays a price history graph of the item
+            </h4></div>
+            <div><h4>
+                4) To update the prices of all tracked items, press UPDATE on the PriceTrack page
+            </h4></div>
+                
+        </div>
+    </div>
+</div>
+{% endblock content %}

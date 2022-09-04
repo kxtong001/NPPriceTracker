@@ -1,0 +1,14 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<div class="container">  
+    <form method="POST" action="">
+        {% csrf_token %}
+        <p>Are you sure you want to delete the link: "{{object.name}}"?</p>
+        <button type="submit" class="btn btn-primary">yes</button>
+                
+    </form>
+</div>
+
+
+{% endblock content %}

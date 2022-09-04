@@ -1,0 +1,65 @@
+{% extends 'landing/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">  
+    <div class ="row mt-5">
+        <div class = "col-md-5 col -sm6">
+            <a href ="{% url 'item-list' %}" class="btn btn-primary ">Back to List</a>
+        </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5>{{item.name}} </h5>
+        </div>
+        <div class="row">
+            <div class="col-4 my-auto mx-auto"> <img src="{{item.imageurl}}" class="img-fluid"></div>
+            <div class="col-8 mx-auto my-auto">
+                <div class="card-body">
+                    <div class="blockquote">
+                        <div>Current Price ($): {{item.current_price}}</div>
+                        <div>Prev Price ($): {{item.old_price}}</div>
+                        <div>Change ($): {{item.price_difference}}</div>
+                        <div><a href="{{item.url}}">Link to item</a></div>
+                        <a href="{% url 'delete' item.pk %}"><button class="btn btn-danger">Stop Tracking?</button></a>
+                        <div class="col-12 my-auto mx-auto"> <canvas id="itemChart" width="50" height="20vh"></canvas></div>  
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+    <!-- script for chartjs generation-->
+    <script>
+        const ctx = document.getElementById('itemChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["{{item.created}}","{{item.updated}}","{{item.datetime1}}","{{item.datetime2}}","{{item.datetime3}}"],
+                datasets: [{
+                    label: '{{item.name}}',
+                    data: ["{{item.old_price}}","{{item.current_price}}","{{item.price1}}","{{item.price2}}","{{item.price3}}"],
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                legend:{
+                    position:'bottom'
+                }
+            }
+        });
+    </script>
+    {% else %}
+        <h3> Please <a href="{% url 'account_login' %}">Login </a>to use this feature </h3>
+    {% endif %}
+</div>
+
+{% endblock content %}

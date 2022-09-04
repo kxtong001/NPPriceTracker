@@ -1,0 +1,22 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10 col-sm-12 text-center">
+            <h1 class="display-2">Track your items!</h1>
+            <p class="mt-3 lead">NPPriceTrack helps you track prices of items for your volunteer needs</p>
+            {% if user.is_authenticated %}
+                <div class="d-flex justify-content-center mt-5">
+                    <p class="mt-3 lead">Head over to the <a href ="{% url 'item-list' %}">PriceTracking Page</a> to get started!</p>
+                </div>
+            {% else %}
+                <div class="d-flex justify-content-center mt-5">
+                    <a href="{% url 'account_login' %}" class="btn btn-light mr-2">Log In</a>
+                    <a href="{% url 'account_signup' %}" class="btn btn-dark">Register</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
